@@ -11,12 +11,13 @@ import org.openqa.selenium.support.How;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import utils.BrowserSetUp;
 import utils.excelReader;
 
 
 public class pages {
 	
-	WebDriver driver;
+	BrowserSetUp browser = new BrowserSetUp();
 	
 //	@FindBy(name="uid")
 //	private WebElement username;
@@ -35,19 +36,18 @@ public class pages {
 	
 	public void enterUsername(String arg) throws IOException {
 		//username.sendKeys(arg);
-		System.out.println(arg);
-		driver.findElement(By.name("uid")).sendKeys(arg);
+		browser.getDriver().findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
 	}
 
 	
 	public void enterPassword(String arg) {
 		//password.sendKeys(arg);
-		driver.findElement(By.name("password"));
+		browser.getDriver().findElement(By.name("password")).sendKeys(arg);;
 	}
 	
 	public void clickLogin() {
 		//login.click();
-		driver.findElement(By.name("btnLogin")).click();
+		browser.getDriver().findElement(By.name("btnLogin")).click();
 	}
 	
 	public void loggedIn(String uid, String pwd) throws IOException {
@@ -55,8 +55,8 @@ public class pages {
 		enterPassword(pwd);
 		clickLogin();
 		
-		String actual=driver.getTitle();
-		String expected ="Guru99";
+		String actual=browser.getDriver().getTitle();
+		String expected ="Guru99 Bank Manager HomePage";
 		Assert.assertEquals(actual, expected);
 		Reporter.log("Successfully logged in to the Application", true);
 		

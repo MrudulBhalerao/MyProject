@@ -18,7 +18,7 @@ public class excelReader {
 	
 	public static String[] read_excel() throws IOException {
 		
-		String path ="C://Users//Mrudul//Desktop//Mrudul//SeleniumWorkspace-Guru99 Project//BankWebSite//resources//TestDataSheet.xlsx";
+		String path ="C://Users//Mrudul//Desktop//Mrudul//GitHub//resources//TestDataSheet.xlsx";
 		FileInputStream fis = new FileInputStream(path);
 		
 		//OPCPackage pkg = OPCPackage.open(path);

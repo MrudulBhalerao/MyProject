@@ -11,12 +11,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
-public class browserSetUp {
+public class BrowserSetUp {
 	
-    
+	static WebDriver driver=null;
 	
-	public static WebDriver setBrowserAs(String browserType, String url) {
-		WebDriver driver=null;
+	public static void setBrowserAs(String browserType, String url) {
+		
 		
 		if(browserType.equalsIgnoreCase("chrome")) {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mrudul\\Desktop\\ChromeDriver\\chromedriver_win32\\chromedriver.exe");
@@ -37,13 +37,14 @@ public class browserSetUp {
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
-		
-	
-		return driver;
-		
-		
 		}
 	
+	public WebDriver getDriver() {
+		if(driver==null) {
+			System.out.println("Check the driver setup");
+		}
+		return driver;
+	}
 		
 	@AfterTest
 	public void closingBrowser() {
