@@ -11,32 +11,34 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BrowserSetUp {
 	
 	static WebDriver driver=null;
 	
-	public static void setBrowserAs(String browserType, String url) {
+	public static void setBrowserAs(String browserType) {
 		
 		
 		if(browserType.equalsIgnoreCase("chrome")) {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mrudul\\Desktop\\ChromeDriver\\chromedriver_win32\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup(); 
 		driver= new ChromeDriver();
 		Reporter.log("Chrome Browser launched successfully",true);
 	     
 		}else if(browserType.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.gecko.driver", "<Path>");
+			WebDriverManager.firefoxdriver().setup(); 
+			
 			driver= new FirefoxDriver();
 			Reporter.log("Firefox Browser launched successfully",true);
 			}
 		else if (browserType.equalsIgnoreCase("internet explorer")) {
-			System.setProperty("webdriver.ie.driver", "<path>");
+			WebDriverManager.iedriver().setup(); 
 			driver= new InternetExplorerDriver();
 			Reporter.log("Internet Explorer Browser launched successfully",true);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		driver.get(url);
 		}
 	
 	public WebDriver getDriver() {

@@ -10,7 +10,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import PO.pages;
+import PO.loginPages;
 import utils.BrowserSetUp;
 import utils.excelReader;
 
@@ -21,7 +21,8 @@ public class loginToBankSite {
 	public void LoginToApplication(@Optional("firefox") String browser,@Optional("https://www.google.com") String url) throws IOException, InvalidFormatException {
 		//WebDriver driver= BrowserSetUp.setBrowserAs(browser,url);
 		BrowserSetUp browserSetup = new BrowserSetUp();
-		browserSetup.setBrowserAs(browser, url);
+		browserSetup.setBrowserAs(browser);
+		browserSetup.getDriver().get(url);
 		
 		String[] credentials=excelReader.read_excel();
 		String uid=credentials[0];
@@ -30,7 +31,7 @@ public class loginToBankSite {
 		
 		
 		//pages p = PageFactory.initElements(driver,pages.class);
-		pages p = new pages();
+		loginPages p = new loginPages(browserSetup.getDriver());
 		p.loggedIn(uid, pwd);
 		
 	}

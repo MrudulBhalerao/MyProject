@@ -15,9 +15,15 @@ import utils.BrowserSetUp;
 import utils.excelReader;
 
 
-public class pages {
+public class loginPages {
 	
-	BrowserSetUp browser = new BrowserSetUp();
+	//BrowserSetUp browser = new BrowserSetUp();
+	
+	WebDriver driver;
+	
+	public loginPages(WebDriver driver) {
+		this.driver=driver;
+	}
 	
 //	@FindBy(name="uid")
 //	private WebElement username;
@@ -36,18 +42,22 @@ public class pages {
 	
 	public void enterUsername(String arg) throws IOException {
 		//username.sendKeys(arg);
-		browser.getDriver().findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
+		//browser.getDriver().findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
+		driver.findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
+		
 	}
 
 	
 	public void enterPassword(String arg) {
 		//password.sendKeys(arg);
-		browser.getDriver().findElement(By.name("password")).sendKeys(arg);;
+		//browser.getDriver().findElement(By.name("password")).sendKeys(arg);
+		driver.findElement(By.name("password")).sendKeys(arg);
 	}
 	
 	public void clickLogin() {
 		//login.click();
-		browser.getDriver().findElement(By.name("btnLogin")).click();
+		//browser.getDriver().findElement(By.name("btnLogin")).click();
+		driver.findElement(By.name("btnLogin")).click();
 	}
 	
 	public void loggedIn(String uid, String pwd) throws IOException {
@@ -55,7 +65,7 @@ public class pages {
 		enterPassword(pwd);
 		clickLogin();
 		
-		String actual=browser.getDriver().getTitle();
+		String actual=driver.getTitle();
 		String expected ="Guru99 Bank Manager HomePage";
 		Assert.assertEquals(actual, expected);
 		Reporter.log("Successfully logged in to the Application", true);

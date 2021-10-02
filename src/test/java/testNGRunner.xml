@@ -7,6 +7,7 @@
       
     <classes>
       <class name="TestCases.loginToBankSite"/>
+      <class name="TestCases.NewToursTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
