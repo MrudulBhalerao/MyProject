@@ -3,6 +3,11 @@ package utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -16,29 +21,39 @@ import org.testng.Reporter;
 
 public class excelReader {
 	
-	public static String[] read_excel() throws IOException {
-		
+	public static Map<String, List<String>> read_excel() throws IOException {
+		Map<String,List<String>> userInputs= new HashMap<>(); //taking particular users input int hasmap <K,V>=<Username,otherfields>
 		String path ="C://Users//Mrudul//Desktop//Mrudul//GitHub//resources//TestDataSheet.xlsx";
 		FileInputStream fis = new FileInputStream(path);
 		
 		//OPCPackage pkg = OPCPackage.open(path);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sh = wb.getSheet("Login Credentials");
-		int rowCount = sh.getLastRowNum()-sh.getFirstRowNum();
-		String[] Credentials=new String[2];
-		
-		
-		for (int row=1; row<=rowCount;row++) {
+		int rowCount = sh.getPhysicalNumberOfRows();
+		int cellCount = sh.getRow(0).getPhysicalNumberOfCells();
+	
+		for (int row=1; row<=rowCount-1;row++) {
+			String keyAsUsername="";   //particular user
+			List<String>valuesOfUser=new ArrayList<>(); //other inputs of user
 			
-			//int cellCount = rw.getLastCellNum()-rw.getFirstCellNum
-				Credentials[0]=sh.getRow(row).getCell(0).getStringCellValue();
-				Reporter.log(Credentials[0], true);
+			XSSFRow rw=sh.getRow(row);
+			for(int col =0;col<=cellCount-1;col++) {
 				
-				Credentials[1]=sh.getRow(row).getCell(1).getStringCellValue();
-				Reporter.log(Credentials[1], true);
+				String c=rw.getCell(col).getStringCellValue();
+				if(col==0) {
+					keyAsUsername=c;
+					
+				}else {
+				valuesOfUser.add(c);
+				
+				}
+			
+			userInputs.put(keyAsUsername, valuesOfUser);
 			
 		}
-		return Credentials;
+		}
+		
+		return userInputs;
 		
 	}
 

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -25,42 +26,43 @@ public class loginPages {
 		this.driver=driver;
 	}
 	
-//	@FindBy(name="uid")
-//	private WebElement username;
+	@FindBy(name="uid")
+	private WebElement username;
 
 	
-//	@FindBy(name="password")
-//	private WebElement password;
-//	
-//	@FindBy(name="btnLogin")
-//    private WebElement login;
-//	
+	@FindBy(name="password")
+	private WebElement password;
+	
+	@FindBy(name="btnLogin")
+    private WebElement login;
+	
 //	public pages() throws IOException, InvalidFormatException{
 //		String[] loginCred=excelReader.read_excel();
 //	}
 //	
 	
 	public void enterUsername(String arg) throws IOException {
-		//username.sendKeys(arg);
+		username.sendKeys(arg);
 		//browser.getDriver().findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
-		driver.findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
+		//driver.findElement(By.xpath("//input[@name=\"uid\"]")).sendKeys(arg);
 		
 	}
 
 	
 	public void enterPassword(String arg) {
-		//password.sendKeys(arg);
+		password.sendKeys(arg);
 		//browser.getDriver().findElement(By.name("password")).sendKeys(arg);
-		driver.findElement(By.name("password")).sendKeys(arg);
+		//driver.findElement(By.name("password")).sendKeys(arg);
 	}
 	
 	public void clickLogin() {
-		//login.click();
+		login.click();
 		//browser.getDriver().findElement(By.name("btnLogin")).click();
-		driver.findElement(By.name("btnLogin")).click();
+		//driver.findElement(By.name("btnLogin")).click();
 	}
 	
 	public void loggedIn(String uid, String pwd) throws IOException {
+		PageFactory.initElements(driver, this);
 		enterUsername(uid);
 		enterPassword(pwd);
 		clickLogin();

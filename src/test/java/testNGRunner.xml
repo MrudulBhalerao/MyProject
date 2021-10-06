@@ -4,10 +4,12 @@
     
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="http://www.demo.guru99.com/V4/"/>
+    <parameter name="username" value="mngr355719"/>
+    <parameter name="password" value="muradat"/>
       
     <classes>
       <class name="TestCases.loginToBankSite"/>
-      <class name="TestCases.NewToursTest"/>
+      <class name="TestCases.NewToursTest"/> 
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

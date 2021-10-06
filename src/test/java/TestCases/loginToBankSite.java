@@ -17,22 +17,17 @@ import utils.excelReader;
 public class loginToBankSite {
 	
 	@Test
-	@Parameters({"browser","url"})
-	public void LoginToApplication(@Optional("firefox") String browser,@Optional("https://www.google.com") String url) throws IOException, InvalidFormatException {
+	@Parameters({"browser","url","username","password"})
+	public void LoginToApplication(@Optional("firefox") String browser,@Optional("https://www.google.com") String url,String username, String password) throws IOException, InvalidFormatException {
 		//WebDriver driver= BrowserSetUp.setBrowserAs(browser,url);
 		BrowserSetUp browserSetup = new BrowserSetUp();
 		browserSetup.setBrowserAs(browser);
 		browserSetup.getDriver().get(url);
 		
-		String[] credentials=excelReader.read_excel();
-		String uid=credentials[0];
-		
-		String pwd=credentials[1];
-		
 		
 		//pages p = PageFactory.initElements(driver,pages.class);
 		loginPages p = new loginPages(browserSetup.getDriver());
-		p.loggedIn(uid, pwd);
+		p.loggedIn(username, password);
 		
 	}
 
